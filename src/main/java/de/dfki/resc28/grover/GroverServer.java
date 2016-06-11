@@ -1,5 +1,5 @@
 /*
- * This file is part of IGraphStore. It is subject to the license terms in
+ * This file is part of Grover. It is subject to the license terms in
  * the LICENSE file found in the top-level directory of this distribution.
  * You may not use this file except in compliance with the License.
  */
