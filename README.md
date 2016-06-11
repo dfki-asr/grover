@@ -1,7 +1,15 @@
 # Grover
 Grover happily serves source files that contain static constants for the terms in a given RDFS or OWL vocabulary.
 
-Installation & Usage
+
+Features
+-
+Currently, Grover converts RDFS or OWL vocabularies into the following languages/RDF frameworks:
+* Java
+** Jena
+
+
+Installation & Running
 -
 Run Grover on your localhost by typing
 ```
@@ -27,6 +35,19 @@ You can modify Grover's listening port in the `pom.xml`
 		...
 	</plugins>
 </build>
+```
+
+
+Usage
+-
+Get Grover up and running. Then, use your favourite REST client and
+```
+GET /{targetLanguage}/{targetFramework}?uri={vocabURI} HTTP/1.1
+```
+
+Need an example?
+```
+curl http://localhost:8080/java/jena?uri=http://xmlns.com/foaf/spec/index.rdf
 ```
 
 
