@@ -14,9 +14,8 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 
 /**
- * 
- * @author resc01
- *
+ * This file has been automatically generated using Grover (https://github.com/rmrschub/grover).
+ * It contains contains static constants for the terms in the <vocabName> vocabulary.
  */
 public final class <vocabName> 
 {
