@@ -5,6 +5,10 @@
 
 VOCAB(vocabName, namespaceUri, localClassNames, localPropertyNames) ::=
 "
+/**
+ * This file has been automatically generated using Grover (https://github.com/rmrschub/grover).
+ * It contains static constants for the terms in the <vocabName> vocabulary.
+ */
 <! define package !>
 package de.dfki.grover.vocabularies;
 
@@ -13,10 +17,6 @@ import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 
-/**
- * This file has been automatically generated using Grover (https://github.com/rmrschub/grover).
- * It contains static constants for the terms in the <vocabName> vocabulary.
- */
 public final class <vocabName> 
 {
   /** 
@@ -65,11 +65,6 @@ public final class <vocabName>
     return ResourceFactory.createProperty(nsName);
   }
 
-  /**
-   * 
-   * @author resc01
-   *
-   */
   public static final class CONSTANTS 
   {
     /**
