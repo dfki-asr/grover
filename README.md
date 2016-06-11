@@ -5,7 +5,7 @@ Installation & Usage
 -
 Run Grover on your localhost by typing
 ```
-`mvn clean package tomcat7:run
+mvn clean package tomcat7:run
 ```
 
 You can modify Grover's listening port in the `pom.xml`
