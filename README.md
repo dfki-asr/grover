@@ -6,6 +6,9 @@ Currently, Grover converts RDFS or OWL vocabularies into the following languages
 * Java
 	* [Jena](https://jena.apache.org/)
 	* [RDF4J](http://rdf4j.org/)
+* C#
+	* [dotNetRDF](http://dotnetrdf.org/) coming soon!
+	* [RDFSharp](https://rdfsharp.codeplex.com/) coming soon!
 
 ## Installation & Running
 Run Grover on your localhost by typing
