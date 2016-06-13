@@ -1,5 +1,5 @@
 # Grover
-Grover is a ployglot schema generator. It happily serves source files that contain static constants for the terms in a given RDFS or OWL vocabulary. This is very similar to Jena's schemagen CLI tool, but Grover comes as a REST service. We plan to extend Grover for catering more target languages and RDF frameworks.
+Grover is a _polyglot schema generator_. It happily serves source files that contain static constants for the terms in a given RDFS or OWL vocabulary. This is very similar to Jena's schemagen CLI tool, but Grover comes as a REST service. We plan to extend Grover for catering more target languages and RDF frameworks.
 
 ## Features
 Currently, Grover converts RDFS or OWL vocabularies into the following languages/RDF frameworks:
