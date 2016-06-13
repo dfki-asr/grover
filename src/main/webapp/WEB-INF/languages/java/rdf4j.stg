@@ -1,0 +1,96 @@
+<! This file is part of Grover. It is subject to the license terms in
+   the LICENSE file found in the top-level directory of this distribution.
+   You may not use this file except in compliance with the License.
+!>
+
+VOCAB(vocabName, namespaceUri, localClassNames, localPropertyNames) ::=
+"
+/**
+ * This file has been automatically generated using Grover (https://github.com/rmrschub/grover).
+ * It contains static constants for the terms in the <vocabName> vocabulary.
+ */
+<! define package !>
+package de.dfki.grover.vocabularies;
+
+<! include imports !>
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Namespace;
+import org.eclipse.rdf4j.model.impl.SimpleNamespace;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+
+public final class <vocabName> 
+{
+  public static final String PREFIX = \"<vocabName>\";
+  public static final Namespace NAMESPACE = new SimpleNamespace(PREFIX, CONSTANTS.NS);
+
+  <if(localClassNames)>
+  /** 
+   * Classes as org.eclipse.rdf4j.model.IRI
+   */
+  <localClassNames:{ c |public static final IRI <c> = resource(CONSTANTS.CLASS_<c>);<\n>}>
+  <endif>
+  <! !>
+  <if(localPropertyNames)>
+  /** 
+   * Properties as org.eclipse.rdf4j.model.IRI 
+   */
+  <localPropertyNames:{ p |public static final IRI <p> = property(CONSTANTS.PROP_<p>);<\n>}>
+  <endif>
+  <! !>
+  <if(localInstanceNames)>
+  /** 
+   * Instances as org.eclipse.rdf4j.model.IRI 
+   */
+  <localInstanceNames:{ i |public static final IRI <i> = resource(CONSTANTS.INST_<i>);<\n>}> 
+  <endif>
+  
+  private static final IRI resource(String nsName)
+  {
+    return SimpleValueFactory.getInstance().createIRI(nsName);
+  }
+
+  private static final IRI property(String nsName)
+  {
+    return SimpleValueFactory.getInstance().createIRI(nsName);
+  }
+
+  private static final class CONSTANTS 
+  {
+    /**
+     * Vocabulary namespace URI as string 
+     */
+    private static final String NS = \"<namespaceUri>\";
+
+    <if(localClassNames)>
+    /**
+     * Local and namespace names of RDF(S) classes as strings 
+     */
+    <localClassNames:{ c |private static final String CLASS_LNAME_<c> = \"<c>\";<\n>private static final String CLASS_<c> = nsName(CLASS_LNAME_<c>);<\n>}>
+    <endif>
+    <! !>
+    <if(localPropertyNames)>
+    /**
+     * Local and namespace names of RDF(S) properties as strings 
+     */
+    <localPropertyNames:{ p |private static final String PROP_LNAME_<p> = \"<p>\";<\n>private static final String PROP_<p> = nsName(PROP_LNAME_<p>);<\n>}>
+    <endif> 
+    <! !>
+    <if(localInstanceNames)>
+    /**
+     * Local and namespace names of RDF(S) instances as strings
+     */
+    <localInstanceNames:{ i |private static final String INST_LNAME_<i> = \"<i>\";<\n>public static final String INST_<i> = nsName(INST_LNAME_<i>);<\n>}>
+    <endif>
+    <! !>
+    /**
+     * Returns the full namespace name of a vocabulary element as a string
+     * @param localName  the local name of a vocabulary element as a string
+     * @return the full namespace name of a vocabulary element as a string
+     */
+    private static String nsName(String localName) 
+    {
+      return NS + localName;
+    }
+  }
+}
+"

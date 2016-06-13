@@ -8,8 +8,8 @@ Features
 -
 Currently, Grover converts RDFS or OWL vocabularies into the following languages/RDF frameworks:
 * Java
-	* Jena
-
+	* [Jena](https://jena.apache.org/)
+	* [RDF4J](http://rdf4j.org/)
 
 Installation & Running
 -
