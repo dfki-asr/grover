@@ -3,16 +3,13 @@ Grover happily serves source files that contain static constants for the terms i
 This is very similar to Jena's schemagen CLI tool, but Grover comes as a REST service.
 We plan to extend Grover for catering more target languages and RDF frameworks.
 
-
-Features
--
+## Features
 Currently, Grover converts RDFS or OWL vocabularies into the following languages/RDF frameworks:
 * Java
 	* [Jena](https://jena.apache.org/)
 	* [RDF4J](http://rdf4j.org/)
 
-Installation & Running
--
+## Installation & Running
 Run Grover on your localhost by typing
 ```
 mvn clean package tomcat7:run
@@ -39,31 +36,34 @@ You can modify Grover's listening port in the `pom.xml`
 </build>
 ```
 
+## Usage
+Get Grover up and running. Then, use your favourite REST client against one of Grover's REST APIs
 
-Usage
--
-Get Grover up and running. Then, use your favourite REST client and
+### Form-style GET API
+HTTP GET requests can be made against Grover's form-style GET API as follows
 ```
 GET /{targetLanguage}/{targetFramework}?uri={vocabURI} HTTP/1.1
 ```
+Where _targetLanguage_ is your desired target programming language, _targetFramework_ is your desired RDF framework and _vocabURI_ is the HTTP resource to be processed.
 
-Need an example?
+Need some examples?
 ```
-curl http://localhost:8080/java/jena?uri=http://xmlns.com/foaf/spec/index.rdf
+http://localhost:8080/java/jena?uri=http://xmlns.com/foaf/spec/index.rdf
+http://localhost:8080/java/rdf4j?uri=http://lov.okfn.org/vocommons/voaf/v2.3/voaf_v2.3.rdf
 ```
 
+### Direct POST API
+Coming soon.
 
-Contributing
--
+### Form-style POST API
+Coming soon.
+
+## Contributing
 Contributions are very welcome.
 
-
-License
--
+## License
 This source distribution is subject to the license terms in the LICENSE file found in the top-level directory of this distribution.
 You may not use this file except in compliance with the License.
 
-
-Third-party Contents
--
+## Third-party Contents
 This source distribution includes the third-party items with respective licenses as listed in the THIRD-PARTY file found in the top-level directory of this distribution.
