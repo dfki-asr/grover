@@ -16,31 +16,30 @@ package de.dfki.grover.vocabularies;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.shared.PrefixMapping;
 
 public final class <vocabName> 
 {
-  /** 
-   * Namespace URI as Jena resource 
-   */
-  public static final Resource NAMESPACE = ResourceFactory.createResource(CONSTANTS.getNSURI());
+  public static final String PREFIX = \"<vocabName>\";
+  public static final PrefixMapping NAMESPACE = PrefixMapping.Factory.create().setNsPrefix(PREFIX, CONSTANTS.NS);
 
   <if(localClassNames)>
   /** 
-   * Classes as Jena resources 
+   * Classes as org.apache.jena.rdf.model.Resource
    */
   <localClassNames:{ c |public static final Resource <c> = resource(CONSTANTS.CLASS_<c>);<\n>}>
   <endif>
   <! !>
   <if(localPropertyNames)>
   /** 
-   * Properties as Jena properties 
+   * Properties as org.apache.jena.rdf.model.Property
    */
   <localPropertyNames:{ p |public static final Property <p> = property(CONSTANTS.PROP_<p>);<\n>}>
   <endif>
   <! !>
   <if(localInstanceNames)>
   /** 
-   * Instances as Jena resources 
+   * Instances as org.apache.jena.rdf.model.Resource
    */
   <localInstanceNames:{ i |public static final Resource <i> = resource(CONSTANTS.INST_<i>);<\n>}> 
   <endif>
@@ -65,43 +64,34 @@ public final class <vocabName>
     return ResourceFactory.createProperty(nsName);
   }
 
-  public static final class CONSTANTS 
+  private static final class CONSTANTS 
   {
     /**
      * Vocabulary namespace URI as string 
      */
-    public static final String NS = \"<namespaceUri>\";
+    private static final String NS = \"<namespaceUri>\";
 
     <if(localClassNames)>
     /**
      * Local and namespace names of RDF(S) classes as strings 
      */
-    <localClassNames:{ c |public static final String CLASS_LNAME_<c> = \"<c>\";<\n>public static final String CLASS_<c> = nsName(CLASS_LNAME_<c>);<\n>}>
+    <localClassNames:{ c |private static final String CLASS_LNAME_<c> = \"<c>\";<\n>private static final String CLASS_<c> = nsName(CLASS_LNAME_<c>);<\n>}>
     <endif>
     <! !>
     <if(localPropertyNames)>
     /**
      * Local and namespace names of RDF(S) properties as strings 
      */
-    <localPropertyNames:{ p |public static final String PROP_LNAME_<p> = \"<p>\";<\n>public static final String PROP_<p> = nsName(PROP_LNAME_<p>);<\n>}>
+    <localPropertyNames:{ p |private static final String PROP_LNAME_<p> = \"<p>\";<\n>private static final String PROP_<p> = nsName(PROP_LNAME_<p>);<\n>}>
     <endif> 
     <! !>
     <if(localInstanceNames)>
     /**
      * Local and namespace names of RDF(S) instances as strings
      */
-    <localInstanceNames:{ i |public static final String INST_LNAME_<i> = \"<i>\";public static final String INST_<i> = nsName(INST_LNAME_<i>);<\n>}>
+    <localInstanceNames:{ i |private static final String INST_LNAME_<i> = \"<i>\";<\n>private static final String INST_<i> = nsName(INST_LNAME_<i>);<\n>}>
     <endif>
     <! !>
-    /**
-     * Returns the namespace of the vocabulary as a string
-     * @return the namespace of the vocabulary as a string
-     */
-    private static String getNSURI()
-    {
-      return NS;
-    }
-
     /**
      * Returns the full namespace name of a vocabulary element as a string
      * @param localName  the local name of a vocabulary element as a string
@@ -110,16 +100,6 @@ public final class <vocabName>
     private static String nsName(String localName) 
     {
       return NS + localName;
-    }
-
-    /**
-     * Returns the local name of a vocabulary element as a string
-     * @param nsName  the full namespace name of a vocabulary element
-     * @return the local name of a vocabulary element as a string
-     */
-    public static String localName(String nsName)
-    {
-      return nsName.replace(NS, \"\");
     }
   }
 }
