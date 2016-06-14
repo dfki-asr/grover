@@ -11,15 +11,19 @@
     <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
     <script src="https://codemirror.net/lib/codemirror.js"></script>
     <script src="https://codemirror.net/mode/clike/clike.js"></script>
+    <script src="https://codemirror.net/addon/display/autorefresh.js"></script>
     
 <style type="text/css">
     html, body {
         height: 100%;
         margin: 0px;
     }
+    .nav {
+        /* background: #e3d235; */
+    }
     .panel-body {
         height: 100%;
-        background: #f0e68c;
+        /* background: #f0e68c; */
     }
       .CodeMirror {
         border: 1px solid #eee;
@@ -45,9 +49,6 @@
             <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
                     <br/>
-                    <!--
-                    <form class="form-horizontal" id="byGET" method="get" onsubmit="this.action='api/'+this.targetLanguage.value+'/'+this.targetFramework.value;this.targetLanguage.name='';this.targetFramework.name='';this.submit.name='';"> 
-                    -->
                     <form class="form-horizontal" id="byGET" method="get">
                         <fieldset>
                             <div class="form-group row">
@@ -139,24 +140,7 @@
 
                 <div id="menu3" class="tab-pane fade">
                     <form>
-                        <textarea id="editor" name="editor">
-/**
- * This file has been automatically generated using Grover (https://github.com/rmrschub/grover).
- * It contains static constants for the terms in the D2RQ vocabulary.
- */
-package de.dfki.grover.vocabularies;
-
-import org.apache.jena.rdf.model.Property;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.shared.PrefixMapping;
-
-public final class D2RQ 
-{
-  public static final String PREFIX = "D2RQ";
-  public static final PrefixMapping NAMESPACE = PrefixMapping.Factory.create().setNsPrefix(PREFIX, CONSTANTS.NS);
-}
-                        </textarea>
+                        <textarea id="editor" name="editor"></textarea>
                     </form>
                 </div>
             </div>
@@ -166,12 +150,14 @@ public final class D2RQ
     
     
 <script type="text/javascript">
-var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-  viewportMargin: Infinity,
-  readOnly: true,
-  styleActiveLine: true,
-  mode: "text/x-java"
-});
+    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        viewportMargin: Infinity,
+        readOnly: true,
+        styleActiveLine: true,
+        mode: "text/x-java",
+        autoRefresh: true
+    });
+    $('#editor').data('CodeMirrorInstance', editor);
 </script>
     
 <script type="text/javascript">
@@ -182,15 +168,16 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
             vocabURI = $("input[name='uri']" , "#byGET").val();
         
         $.get(
-            "api/" + targetLanguage + "/" + targetFramework + "?" + vocabURI,
+            "api/" + targetLanguage + "/" + targetFramework + "?uri=" + vocabURI,
             function(data) {
-                $("#editor").empty().append(data);
+                $('.nav-tabs a[href="#menu3"]').tab('show');
+                var editor = $('#editor').data('CodeMirrorInstance');
+                editor.getDoc().setValue(data);
+
             }
         );
         
-        $(".CodeMirror").each(function(i, el){
-            el.CodeMirror.refresh();
-        });
+
 
     });
 </script>
