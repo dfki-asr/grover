@@ -1,17 +1,25 @@
+
 <!DOCTYPE html>
+
+<!-- This file is part of Grover. It is subject to the license terms in
+     the LICENSE file found in the top-level directory of this distribution.
+     You may not use this file except in compliance with the License. -->
+
 <html lang="en">
 <head>
     <title>Grover</title>
     <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
     <script src="https://codemirror.net/lib/codemirror.js"></script>
     <script src="https://codemirror.net/mode/clike/clike.js"></script>
     <script src="https://codemirror.net/addon/display/autorefresh.js"></script>
+    <script src="http://www.appelsiini.net/projects/chained/jquery.chained.min.js"></script>
     
 <style type="text/css">
     html, body {
@@ -25,10 +33,17 @@
         height: 100%;
         /* background: #f0e68c; */
     }
-      .CodeMirror {
+    .CodeMirror {
         border: 1px solid #eee;
         height: auto;
-      }
+    }
+    .outerPanel {
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        background: #f2f2f2
+    }
 
 </style>    
 </head>
@@ -36,12 +51,20 @@
 <body>
         
 <div class="container">
+    <br/>
+    <div class="panel panel-default outerPanel">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p><b>Grover</b> is a polyglot schema generator and happily serves source code files that contain static constants for the terms in a given RDFS or OWL vocabulary.</p>
+        </div>
+    </div>
     
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">By URI</a></li>
-        <li><a data-toggle="tab" href="#menu1">By Text</a></li>
-        <li><a data-toggle="tab" href="#menu2">Advanced</a></li>
-        <li><a data-toggle="tab" href="#menu3">Source Code</a></li>
+        <li class="active"><a data-toggle="tab" href="#home">Input by URI</a></li>
+        <li><a data-toggle="tab" href="#menu1">Input by text</a></li>
+<!--        <li><a data-toggle="tab" href="#menu2">Advanced Configuration</a></li> -->
+        <li><a data-toggle="tab" href="#menu3">Output</a></li>
+        <li><a data-toggle="tab" href="#menu4">About</a></li>
     </ul>
 
     <div class="panel panel-default">
@@ -60,7 +83,8 @@
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="targetLanguage">Target Language</label>
                                 <div class="col-md-10">
-                                    <select id="targetLanguage" name="targetLanguage" class="form-control">
+                                    <select id="targetLanguageByURI" name="targetLanguage" class="form-control">
+                                        <option value="">--</option>
                                         <option value="java">Java</option>
                                         <option value="csharp">C#</option>
                                     </select>
@@ -69,9 +93,12 @@
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="targetFramework">RDF Framework</label>
                                 <div class="col-md-10">
-                                    <select id="targetFramework" name="targetFramework" class="form-control">
-                                        <option value="jena">Jena</option>
-                                        <option value="rdf4j">RDF4J</option>
+                                    <select id="targetFrameworkByURI" name="targetFramework" class="form-control">
+                                        <option value="">--</option>
+                                        <option value="jena" class="java">Jena</option>
+                                        <option value="rdf4j" class="java">RDF4J</option>
+                                        <option value="dotNetRDF" class="csharp">dotNetRDF</option>
+                                        <option value="rdfSharp" class="csharp">RDFSharp</option>
                                     </select>
                                 </div>
                             </div>
@@ -109,18 +136,22 @@
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="targetLanguage">Target Language</label>
                                 <div class="col-md-10">
-                                    <select id="targetLanguage" name="targetLanguage" class="form-control">
-                                        <option value="1">Java</option>
-                                        <option value="2">C#</option>
+                                    <select id="targetLanguageByText" name="targetLanguage" class="form-control">
+                                        <option value="">--</option>
+                                        <option value="java">Java</option>
+                                        <option value="csharp">C#</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 control-label" for="targetFramework">RDF Framework</label>
                                 <div class="col-md-10">
-                                    <select id="targetFramework" name="targetFramework" class="form-control">
-                                        <option value="1">Jena</option>
-                                        <option value="2">RDF4J</option>
+                                    <select id="targetFrameworkByText" name="targetFramework" class="form-control">
+                                        <option value="">--</option>
+                                        <option value="jena" class="java">Jena</option>
+                                        <option value="rdf4j" class="java">RDF4J</option>
+                                        <option value="dotNetRDF" class="csharp">dotNetRDF</option>
+                                        <option value="rdfSharp" class="csharp">RDFSharp</option>
                                     </select>
                                 </div>
                             </div>
@@ -143,10 +174,32 @@
                         <textarea id="editor" name="editor"></textarea>
                     </form>
                 </div>
+                    
+                <div id="menu4" class="tab-pane fade">
+                    <h3>What does Grover do?</h3>
+                    <p>Grover generates and serves source code files that contain static constants for the terms in a given RDFS or OWL vocabulary.</p>
+                    <p>Grover is very similar to <a href="https://jena.apache.org/documentation/tools/schemagen.html">Jena's schemagen CLI tool</a>, but comes as a REST service.</p>
+                    <p>We plan to extend Grover for catering more target languages and RDF frameworks.</p>
+                    <h3>Contact</h3>
+                    <p>Add vcard here...</p>
+                </div>
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>This work has been supported by the <a href="http://www.bmbf.de/en/index.html">German Ministry for Education and Research (BMBF)</a> as part of the <a href="http://www.arvida.de/">ARVIDA project.</a></p>
+            </div>
+        </div>
+    </div>    
 </div>
+    
+<script type="text/javascript">
+    $("#targetFrameworkByURI").chainedTo($("#targetLanguageByURI"));
+    $("#targetFrameworkByText").chainedTo($("#targetLanguageByText"));
+</script>
+
     
     
 <script type="text/javascript">
@@ -173,6 +226,7 @@
                 $('.nav-tabs a[href="#menu3"]').tab('show');
                 var editor = $('#editor').data('CodeMirrorInstance');
                 editor.getDoc().setValue(data);
+                editor.refresh();
 
             }
         );
@@ -182,8 +236,11 @@
     });
 </script>
 
-        
-        
+<style type='text/css'>@import url('http://getbarometer.s3.amazonaws.com/assets/barometer/css/barometer.css');</style>
+<script src='http://getbarometer.s3.amazonaws.com/assets/barometer/javascripts/barometer.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8">
+  BAROMETER.load('D2D88y7fGGhLd72ahB937');
+</script>        
 
 </body>
 </html>
