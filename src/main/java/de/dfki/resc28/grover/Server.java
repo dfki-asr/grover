@@ -11,7 +11,8 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-import de.dfki.resc28.grover.service.GroverJavaService;
+import de.dfki.resc28.grover.service.CSharpService;
+import de.dfki.resc28.grover.service.JavaService;
 
 
 /**
@@ -20,14 +21,15 @@ import de.dfki.resc28.grover.service.GroverJavaService;
  */
 
 @ApplicationPath("/")
-public class GroverServer extends Application 
+public class Server extends Application 
 {
 	@Override
 	public Set<Class<?>> getClasses() 
 	{
 		super.getClasses();
 		final Set<Class<?>> classes = new HashSet<Class<?>>();
-		classes.add(GroverJavaService.class);
+		classes.add(JavaService.class);
+		classes.add(CSharpService.class);
 		return classes;
 	}
 }

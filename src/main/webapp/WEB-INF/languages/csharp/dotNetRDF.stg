@@ -1,0 +1,114 @@
+<! This file is part of Grover. It is subject to the license terms in
+   the LICENSE file found in the top-level directory of this distribution.
+   You may not use this file except in compliance with the License.
+!>
+
+VOCAB(vocabName, namespaceUri, localClassNames, localPropertyNames) ::=
+"
+/**
+ * This file has been automatically generated using Grover (https://github.com/rmrschub/grover).
+ * It contains static constants for the terms in the <vocabName> vocabulary.
+ */
+<! define usings !>
+using System;
+
+using VDS.RDF;
+
+namespace Grover 
+{
+  public static class <vocabName> 
+  {
+    public static String Prefix = \"<vocabName>\";
+    
+    private static Uri uri_namespace = null;
+    public static void AddToNamespaceMapper(Graph graph) {
+     if (uri_namespace == null) uri_DatasetOccurrences = UriFactory.Create(Constants.Namespace);
+      graph.NamespaceMap.AddNamespace(Prefix, uri_namespace);
+    }
+
+    <if(localClassNames)>
+    <localClassNames:{ c |
+      private static Uri uri_<c> = null;
+      public static Uri Uri_<c> 
+      { 
+        get {
+          if (uri_<c> == null) uri_<c> = UriFactory.Create(Constants.CLASS_<c>);
+          return uri_<c>;
+        \} 
+      \}
+      public static IUriNode createNode_<c>(Graph graph)
+      {
+          return graph.CreateUriNode(Uri_<c>);
+      \}
+      
+    }>
+    <endif>
+     <if(localPropertyNames)>
+     <localPropertyNames:{ c |
+      private static Uri uri_<c> = null;
+      public static Uri Uri_<c> 
+      { 
+        get {
+          if (uri_<c> == null) uri_<c> = UriFactory.Create(Constants.PROP_<c>);
+          return uri_<c>; 
+        \}
+     \}
+      public static IUriNode createNode_<c>(Graph graph)
+      {
+          return graph.CreateUriNode(Uri_<c>);
+      \}
+    }>
+    <endif>
+    <! !>
+    <if(localInstanceNames)>
+     <localInstanceNames:{ c |
+      private static Uri uri_<c> = null;
+      public static Uri Uri_<c> 
+      { 
+        get {
+          if (uri_<c> == null) uri_<c> = UriFactory.Create(Constants.INST_<c>);
+          return uri_<c>; 
+        \}
+      \}
+      public static IUriNode createNode_<c>(Graph graph)
+      {
+          return graph.CreateUriNode(Uri_<c>);
+      \}
+    }>
+    <endif>
+   
+    
+   
+    public static class Constants 
+    {
+      /**
+       * Vocabulary namespace URI as string 
+       */
+      public static String Namespace = \"<namespaceUri>#\";
+
+      <if(localClassNames)>
+      /**
+       * Local and namespace names of RDF(S) classes as strings 
+       */
+      <localClassNames:{ c |public static String CLASS_LNAME_<c> = \"<c>\";<\n>public static String CLASS_<c> = Namespace + CLASS_LNAME_<c>;<\n>}>
+      <endif>
+      <! !>
+      <if(localPropertyNames)>
+      /**
+       * Local and namespace names of RDF(S) properties as strings 
+       */
+      <localPropertyNames:{ p | public static String PROP_LNAME_<p> = \"<p>\";<\n>public static String PROP_<p> = Namespace + PROP_LNAME_<p>;<\n>}>
+      <endif> 
+      <! !>
+      <if(localInstanceNames)>
+      /**
+       * Local and namespace names of RDF(S) instances as strings
+       */
+      <localInstanceNames:{ i | public static String INST_LNAME_<i> = \"<i>\";<\n>public static String INST_<i> = Namespace + INST_LNAME_<i>;<\n>}>
+      <endif>
+      <! !>
+
+    }
+  }
+}
+"

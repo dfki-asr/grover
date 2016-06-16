@@ -7,7 +7,7 @@ Currently, Grover converts RDFS or OWL vocabularies into the following languages
 	* [Jena](https://jena.apache.org/)
 	* [RDF4J](http://rdf4j.org/)
 * C#
-	* [dotNetRDF](http://dotnetrdf.org/) coming soon!
+	* [dotNetRDF](http://dotnetrdf.org/)
 	* [RDFSharp](https://rdfsharp.codeplex.com/) coming soon!
 
 ## Installation & Running
@@ -38,26 +38,23 @@ You can modify Grover's listening port in the `pom.xml`
 ```
 
 ## Usage
-Get Grover up and running. Then, use your favourite REST client against one of Grover's REST APIs
+Get Grover up and running. Then, use your favourite REST client against one of our REST APIs.
+
+### HTML UI
+Point your good ol' browser to http://localhost:{YOUR_PORT} for some self-explanatory HTML UI.
 
 ### Form-style GET API
 HTTP GET requests can be made against Grover's form-style GET API as follows
 ```
-GET /{targetLanguage}/{targetFramework}?uri={vocabURI} HTTP/1.1
+GET api/{targetLanguage}/{targetFramework}?uri={vocabURI} HTTP/1.1
 ```
 Where _targetLanguage_ is your desired target programming language, _targetFramework_ is your desired RDF framework and _vocabURI_ is the HTTP resource to be processed.
 
 Need some examples?
 ```
-http://localhost:8080/java/jena?uri=http://xmlns.com/foaf/spec/index.rdf
-http://localhost:8080/java/rdf4j?uri=http://lov.okfn.org/vocommons/voaf/v2.3/voaf_v2.3.rdf
+http://localhost:8080/api/java/jena?uri=http://xmlns.com/foaf/spec/index.rdf
+http://localhost:8080/api/java/rdf4j?uri=http://lov.okfn.org/vocommons/voaf/v2.3/voaf_v2.3.rdf
 ```
-
-### Direct POST API
-Coming soon.
-
-### Form-style POST API
-Coming soon.
 
 ## Contributing
 Contributions are very welcome.

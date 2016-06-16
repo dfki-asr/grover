@@ -98,7 +98,6 @@
                                         <option value="jena" class="java">Jena</option>
                                         <option value="rdf4j" class="java">RDF4J</option>
                                         <option value="dotNetRDF" class="csharp">dotNetRDF</option>
-                                        <option value="rdfSharp" class="csharp">RDFSharp</option>
                                     </select>
                                 </div>
                             </div>
@@ -180,8 +179,8 @@
                     <p>Grover generates and serves source code files that contain static constants for the terms in a given RDFS or OWL vocabulary.</p>
                     <p>Grover is very similar to <a href="https://jena.apache.org/documentation/tools/schemagen.html">Jena's schemagen CLI tool</a>, but comes as a REST service.</p>
                     <p>We plan to extend Grover for catering more target languages and RDF frameworks.</p>
-                    <h3>Contact</h3>
-                    <p>Add vcard here...</p>
+                    <h3>Get your own Grover!</h3>
+                    <p>The source code of this tool is available from <a href="https://github.com/rmrschub/grover">GitHub</a>.
                 </div>
                 </div>
             </div>
