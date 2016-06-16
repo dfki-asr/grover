@@ -1,0 +1,15 @@
+# https://github.com/kubernetes/contrib/tree/master/for-demos/proxy-to-service
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: grover
+spec:
+  containers:
+  - name: grover
+    image: bali:5000/grover
+    imagePullPolicy: Always
+    ports:
+    - name: tcp
+      protocol: TCP
+      containerPort: 80
