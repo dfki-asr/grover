@@ -1,0 +1,44 @@
+<! This file is part of Grover. It is subject to the license terms in
+   the LICENSE file found in the top-level directory of this distribution.
+   You may not use this file except in compliance with the License.
+!>
+
+VOCAB(vocabName, namespaceUri, localClassNames, localPropertyNames) ::=
+"
+/**
+ * This file has been automatically generated using Grover (https://github.com/rmrschub/grover).
+ * It contains static constants for the terms in the <vocabName> vocabulary.
+ */
+<! define usings !>
+using System;
+
+namespace RDFSharp.Model.Vocabulary
+{
+  public static class <vocabName> 
+  {
+    public static readonly String PREFIX = \"<vocabName>\";
+    public static readonly String  BASE_URI = \"<namespaceUri>\";
+    
+    <if(localClassNames)>
+    #region Classes
+    
+    <localClassNames:{ c |public static readonly RDFResource <c> = new RDFResource(<vocabName>.BASE_URI + \"<c>\");<\n>}>
+    #endregion
+    <endif>
+
+    <if(localPropertyNames)>
+    #region Properties
+    
+    <localPropertyNames:{ p |public static readonly RDFResource <p> = new RDFResource(<vocabName>.BASE_URI + \"<p>\");<\n>}>
+    #endregion
+    <endif>
+
+    <if(localInstanceNames)>
+    #region Instances
+    
+    <localInstanceNames:{ i |public static readonly RDFResource <i> = new RDFResource(<vocabName>.BASE_URI + \"<i>\");<\n>}>
+    #endregion
+    <endif>
+  }
+}
+"
