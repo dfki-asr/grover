@@ -8,7 +8,7 @@ Currently, Grover converts RDFS or OWL vocabularies into the following languages
 	* [RDF4J](http://rdf4j.org/)
 * C#
 	* [dotNetRDF](http://dotnetrdf.org/)
-	* [RDFSharp](https://rdfsharp.codeplex.com/) coming soon!
+	* [RDFSharp](https://rdfsharp.codeplex.com/)
 
 ## Installation & Running
 Run Grover on your localhost by typing
@@ -52,8 +52,9 @@ Where _targetLanguage_ is your desired target programming language, _targetFrame
 
 Need some examples?
 ```
-http://localhost:8080/api/java/jena?uri=http://xmlns.com/foaf/spec/index.rdf
-http://localhost:8080/api/java/rdf4j?uri=http://lov.okfn.org/vocommons/voaf/v2.3/voaf_v2.3.rdf
+http://localhost:8080/api/java/jena?uri=http://xmlns.com/foaf/0.1/
+http://localhost:8080/api/java/rdf4j?uri=https://www.w3.org/1999/02/22-rdf-syntax-ns#
+http://localhost:8080/api/csharp/rdfSharp?uri=http://xmlns.com/foaf/0.1/
 ```
 
 ## Contributing

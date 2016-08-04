@@ -84,7 +84,7 @@ namespace Grover
       /**
        * Vocabulary namespace URI as string 
        */
-      public static String Namespace = \"<namespaceUri>#\";
+      public static String Namespace = \"<namespaceUri>\";
 
       <if(localClassNames)>
       /**

@@ -98,6 +98,7 @@
                                         <option value="jena" class="java">Jena</option>
                                         <option value="rdf4j" class="java">RDF4J</option>
                                         <option value="dotNetRDF" class="csharp">dotNetRDF</option>
+                                        <option value="rdfSharp" class="csharp">RDFSharp</option>
                                     </select>
                                 </div>
                             </div>
