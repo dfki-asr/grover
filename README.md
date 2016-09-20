@@ -10,6 +10,10 @@ Currently, Grover converts RDFS or OWL vocabularies into the following languages
 	* [dotNetRDF](http://dotnetrdf.org/)
 	* [RDFSharp](https://rdfsharp.codeplex.com/)
 
+### Maybe coming soon
+* [ruby-rdf](https://github.com/ruby-rdf/rdf-vocab)
+* ...
+
 ## Installation & Running
 Run Grover on your localhost by typing
 ```
